@@ -6,13 +6,14 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 15:12:14 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/18 16:49:09 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/18 17:00:01 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
 # include <stdlib.h>
+# include <stdint.h>
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdio.h>
