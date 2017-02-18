@@ -6,11 +6,11 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 19:12:46 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/18 16:46:31 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/18 17:02:38 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "header.h"
 
 static int	ft_count(uintmax_t n)
 {
