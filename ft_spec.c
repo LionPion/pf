@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:44:43 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/19 14:43:08 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/20 17:41:41 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	ft_width(int i, t_list *spec, int nb)
 					|| spec->con == 'D')) ? n + 1 : n);
 	n = ((spec->hash == 1 && (spec->con == 'x' || spec->con == 'X') && nb != 0)
 			|| (spec->con == 'p') ? n + 2 : n);
-	n = (spec->hash == 1 && (spec->con == 'o'
-				|| spec->con == 'O') && nb != 0 ? n + 1 : n);
+	n = (spec->hash == 1 && (spec->con == 'o' || spec->con == 'O') && nb != 0
+			&& ft_strlen(ft_itoa_base(nb, 8)) >= spec->precision ? n + 1 : n);
 	n = (nb == 0 && spec->precision == 0 && spec->hash == 0 ? 0 : n);
 	spec->i += (spec->con == 'p' && nb == 0 && spec->precision == 0 ? 2 : 0);
 	spec->i += ((spec->con == 'x' || spec->con == 'X')

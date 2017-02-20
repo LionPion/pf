@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:41:15 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/19 15:12:57 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/20 21:47:14 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_list	*ft_create_spec(void)
 	t_list *spec;
 
 	spec = malloc(sizeof(t_list));
+	spec->baks = 0;
 	spec->i = 0;
 	spec->plus = 0;
 	spec->minus = 0;
@@ -30,28 +31,33 @@ t_list	*ft_create_spec(void)
 	return (spec);
 }
 
-void	ft_make(const char *str, va_list ap, t_list *spec)
+void	ft_make(const char *s, va_list ap, t_list *spec)
 {
 	int		i;
+	va_list	tmp;
 
 	i = 0;
-	while (str[i])
+	va_copy(tmp, ap);
+	while (s[i])
 	{
-		if (str[i] != '%')
+		if (s[i] != '%')
 		{
 			(spec->i)++;
-			write(1, &str[i], 1);
+			write(1, &s[i], 1);
 		}
 		else
 		{
-			ft_get_specification(&str[i + 1], spec);
+			ft_get_specification(&s[i + 1], spec, ap);
+			if (spec->baks)
+				ft_baks(ap, tmp, spec->baks);
 			ft_pr(spec, ap);
 			if (spec->con != 0)
-				i += ft_i(&str[i]);
+				i += ft_i(&s[i]);
 			else
-				while (str[i + 1] == ' ' || str[i + 1] == '%'
-						|| (str[i + 1] > 47 && str[i + 1] < 58))
+				while (s[i + 1] == ' ' || s[i + 1] == '%' || s[i + 1] == 'Z'
+	|| s[i + 1] == '.' || s[i + 1] == '*' || (s[i + 1] > 47 && s[i + 1] < 58))
 					i++;
+			ft_bzero(spec);
 		}
 		i++;
 	}

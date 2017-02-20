@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:45:21 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/18 16:49:13 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/20 15:47:35 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void		ft_subitoa_base_pr(uintmax_t n, t_list *spec)
 	base = (spec->con == 'o' || spec->con == 'O' ? 8 : 16);
 	if (spec->minus == 0 && spec->zero == 0)
 		ft_width(ft_strlen(ft_itoa_base(n, base)), spec, n);
-	if (spec->hash == 1 && base == 8 && (n != 0 || spec->precision != -1))
+	if (spec->hash && base == 8 && (n || spec->precision != -1)
+			&& ft_strlen(ft_itoa_base(n, base)) >= spec->precision)
 		write(1, "0", 1);
 	else if ((spec->hash == 1 && spec->con == 'x' && n != 0)
 			|| spec->con == 'p')

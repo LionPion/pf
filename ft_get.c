@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:42:19 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/19 14:42:59 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/20 21:27:12 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ft_i(const char *str)
 	while (str[i] != 's' && str[i] != 'S' && str[i] != 'p' && str[i] != 'd' &&
 			str[i] != 'i' && str[i] != 'D' && str[i] != 'o' && str[i] != 'O' &&
 			str[i] != 'u' && str[i] != 'U' && str[i] != 'x' && str[i] != 'X' &&
-			str[i] != 'c' && str[i] != 'C' && str[i] != '%')
+			str[i] != 'c' && str[i] != 'C' && str[i] != '%' && str[i] != 'Z')
 		i++;
 	return (i);
 }
@@ -30,7 +30,7 @@ void	ft_get_con(const char *str, t_list *spec)
 	if (str[0] == 's' || str[0] == 'S' || str[0] == 'p' || str[0] == 'd' ||
 			str[0] == 'i' || str[0] == 'D' || str[0] == 'o' || str[0] == 'O' ||
 			str[0] == 'u' || str[0] == 'U' || str[0] == 'x' || str[0] == 'X' ||
-			str[0] == 'c' || str[0] == 'C' || str[0] == '%')
+			str[0] == 'c' || str[0] == 'C' || str[0] == '%' || str[0] == 'Z')
 		spec->con = str[0];
 }
 
@@ -71,27 +71,24 @@ void	ft_get_flags(char c, t_list *spec)
 		spec->minus = 1;
 }
 
-void	ft_get_specification(const char *str, t_list *spec)
+void	ft_get_specification(const char *str, t_list *spec, va_list ap)
 {
 	int i;
 
 	i = 0;
+	ft_get_baks(str, spec);
+	if (spec->baks)
+		while ((str[i] > 47 && str[i] < 58) || str[i] == '$')
+			i++;
 	while (str[i] == '#' || str[i] == '0' || str[i] == ' ' ||
 			str[i] == '+' || str[i] == '-')
-	{
-		ft_get_flags(str[i], spec);
-		i++;
-	}
-	if (str[i] > 47 && str[i] < 58)
-	{
-		spec->width = ft_atoi(&str[i]);
-		while (str[i] > 47 && str[i] < 58)
-			i++;
-	}
+		ft_get_flags(str[i++], spec);
+	i = ft_w(str, spec, i, ap);
 	if (str[i] == '.')
 	{
-		spec->precision = ft_atoi(&str[i + 1]);
-		while ((str[i] > 47 && str[i] < 58) || str[i] == '.')
+		spec->precision = str[i + 1] == '*' ? va_arg(ap, int) : ft_atoi(&str[i + 1]);
+		spec->precision = spec->precision < 0 ? -1 : spec->precision;
+		while ((str[i] > 47 && str[i] < 58) || str[i] == '.' || str[i] == '*')
 			i++;
 	}
 	ft_get_sm_con(&str[i], spec);

@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:43:45 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/19 20:41:16 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/20 15:24:35 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		ft_pr_pr(t_list *spec)
 	if (spec->minus == 0)
 		while (n--)
 			write(1, (spec->zero ? "0" : " "), 1);
-	write(1, "%", 1);
+	write(1, &(spec->con), 1);
 	if (spec->minus == 1)
 		while (n--)
 			write(1, (spec->zero ? "0" : " "), 1);

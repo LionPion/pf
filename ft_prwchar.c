@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:43:45 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/19 20:46:46 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/02/20 16:02:32 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		ft_wpr(wchar_t *str, unsigned char *r, t_list *spec)
 
 	i = 0;
 	n = 0;
-	while (str[i])
+	while (str[i] && (n + ft_wlen(str[i]) <= spec->precision || spec->precision == -1))
 	{
 		if (ft_wlen(str[i]) == 1)
 			r[n++] = str[i];
@@ -82,22 +82,27 @@ void		ft_wputstr(wchar_t *str, t_list *spec)
 
 	i = 0;
 	n = 0;
-	while (str[i])
-		n += ft_wlen(str[i++]);
-	r = (unsigned char*)malloc(sizeof(*r) * (n + 1));
-	r[n] = '\0';
 	if (str)
-		n = (spec->precision < n && spec->precision != -1 ?
-				spec->precision : n);
-	spec->i += n;
-	i = spec->width - n;
-	n = spec->precision < 6 && spec->precision != -1 ? spec->precision : 6;
-	if (spec->minus == 0 && i > 0)
-		ft_dop(spec, i);
-	if (str)
+	{
+		while (str[i] && (n + ft_wlen(str[i]) <= spec->precision || spec->precision == -1))
+			n += ft_wlen(str[i++]);
+		r = (unsigned char*)malloc(sizeof(*r) * (n + 1));
+		r[n] = '\0';
+		if (str)
+			n = (spec->precision < n && spec->precision != -1 ?
+					spec->precision : n);
+		spec->i += n;
+		i = spec->width - n;
+		if (spec->minus == 0 && i > 0)
+			ft_dop(spec, i);
 		ft_wpr(str, r, spec);
+	}
 	else
+	{
+		n = spec->precision < 6 && spec->precision != -1 ? spec->precision : 6;
+		spec->i += n;
 		write(1, "(null)", n);
+	}
 	if (spec->minus == 1 && i > 0)
 		ft_dop(spec, i);
 }

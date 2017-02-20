@@ -6,7 +6,7 @@
 #    By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/06 14:42:06 by rpikaliu          #+#    #+#              #
-#    Updated: 2017/02/19 20:48:09 by rpikaliu         ###   ########.fr        #
+#    Updated: 2017/02/20 18:07:07 by rpikaliu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 WWW = -Wall -Wextra -Werror
 
-OBJECTS = ft_printf.o ft_strlen.o ft_putchar.o ft_itoa_base.o ft_atoi.o ft_itoa.o ft_uitoa.o ft_get.o ft_sub.o ft_pr.o ft_putnb.o ft_spec.o ft_prchar.o ft_power.o ft_prwchar.o
+OBJECTS = ft_printf.o ft_strlen.o ft_putchar.o ft_itoa_base.o ft_atoi.o ft_itoa.o ft_uitoa.o ft_get.o ft_sub.o ft_pr.o ft_putnb.o ft_spec.o ft_prchar.o ft_power.o ft_prwchar.o ft_get_width.o
 
 all: $(NAME)
 
