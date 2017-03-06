@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:43:33 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/20 19:16:57 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/03/06 15:03:48 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_pr_ox(t_list *spec, va_list ap)
 
 void	ft_pr(t_list *spec, va_list ap)
 {
-	if (spec->con == 's')
+	if (spec->con == 's' && spec->modify == 0)
 		ft_putstr(va_arg(ap, char*), spec);
 	else if (spec->con == 'c' || spec->con == 'C')
 		ft_wputchar(va_arg(ap, int), spec);
@@ -79,7 +79,7 @@ void	ft_pr(t_list *spec, va_list ap)
 	else if (spec->con == 'o' || spec->con == 'x' || spec->con == 'O'
 			|| spec->con == 'X' || spec->con == 'p')
 		ft_pr_ox(spec, ap);
-	else if (spec->con == 'S')
+	else if (spec->con == 'S' || (spec->con == 's' && spec->modifi == 4))
 		ft_wputstr(va_arg(ap, wchar_t*), spec);
 	else if (spec->con == '%' || spec->con == 'Z')
 		ft_pr_pr(spec);
