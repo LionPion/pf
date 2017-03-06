@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:42:19 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/20 21:27:12 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/03/05 20:03:50 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_get_flags(char c, t_list *spec)
 void	ft_get_specification(const char *str, t_list *spec, va_list ap)
 {
 	int i;
-
+	
 	i = 0;
 	ft_get_baks(str, spec);
 	if (spec->baks)

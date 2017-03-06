@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 15:12:14 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/20 21:47:16 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/03/05 20:41:49 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_list
 	int			width;
 	int			precision;
 	int			modify;
+	int			color;
 	char		con;
 }				t_list;
 
@@ -38,7 +39,10 @@ int				ft_p(int a, int power);
 int				ft_i(const char *str);
 int				ft_strlen(const char *str);
 int				ft_printf(const char *format, ...);
+int				ft_find_color(const char *str, t_list *spec);
+int				ft_submake(t_list *spec, const char *s, int i);
 int				ft_w(const char *str, t_list *spec, int i, va_list ap);
+int				ft_colcmp(const char *s1, const char *s2, unsigned int n);
 
 char			*ft_itoa(intmax_t z);
 char			*ft_uitoa(uintmax_t z);
@@ -46,6 +50,7 @@ char			*ft_itoa_base(uintmax_t value, uintmax_t base);
 
 void			ft_wputstr(wchar_t *s, t_list *spec);
 void			ft_putchar(char c);
+void			ft_pr_color(int n);
 void			ft_pr_pr(t_list *spec);
 void			ft_bzero(t_list *spec);
 void			ft_lputnbr(intmax_t nb);

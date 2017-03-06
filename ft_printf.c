@@ -6,7 +6,7 @@
 /*   By: rpikaliu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 15:41:15 by rpikaliu          #+#    #+#             */
-/*   Updated: 2017/02/20 21:47:14 by rpikaliu         ###   ########.fr       */
+/*   Updated: 2017/03/05 20:10:08 by rpikaliu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_list	*ft_create_spec(void)
 	t_list *spec;
 
 	spec = malloc(sizeof(t_list));
+	spec->color = 0;
 	spec->baks = 0;
 	spec->i = 0;
 	spec->plus = 0;
@@ -31,6 +32,31 @@ t_list	*ft_create_spec(void)
 	return (spec);
 }
 
+int		ft_i2(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '}')
+		i++;
+	return (i);
+}
+
+int		ft_submake(t_list *spec, const char *s, int i)
+{
+	if (s[i] == '{' && ft_find_color(&s[i], spec))
+	{
+		ft_pr_color(spec->color);
+		i += ft_i2(&s[i]);
+	}
+	else
+	{
+		(spec->i)++;
+		write(1, &s[i], 1);
+	}
+	return (i);
+}
+
 void	ft_make(const char *s, va_list ap, t_list *spec)
 {
 	int		i;
@@ -41,10 +67,7 @@ void	ft_make(const char *s, va_list ap, t_list *spec)
 	while (s[i])
 	{
 		if (s[i] != '%')
-		{
-			(spec->i)++;
-			write(1, &s[i], 1);
-		}
+			i = ft_submake(spec, s, i);
 		else
 		{
 			ft_get_specification(&s[i + 1], spec, ap);
@@ -52,7 +75,9 @@ void	ft_make(const char *s, va_list ap, t_list *spec)
 				ft_baks(ap, tmp, spec->baks);
 			ft_pr(spec, ap);
 			if (spec->con != 0)
+			{
 				i += ft_i(&s[i]);
+			}
 			else
 				while (s[i + 1] == ' ' || s[i + 1] == '%' || s[i + 1] == 'Z'
 	|| s[i + 1] == '.' || s[i + 1] == '*' || (s[i + 1] > 47 && s[i + 1] < 58))
